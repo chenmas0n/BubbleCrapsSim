@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://342tiix0dwje"]
+
+[ext_resource type="Script" path="res://die_script.gd" id="1_orx2w"]
+[ext_resource type="PackedScene" uid="uid://b0kxe1grevjpe" path="res://dice.glb" id="2_jo7mq"]
+[ext_resource type="AudioStream" uid="uid://da6jlcyuknba5" path="res://Confirm 1.wav" id="3_djwvv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dpgau"]
+
+[node name="Die1" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.31639, 0, 0.453914)
+mass = 7.0
+gravity_scale = 10.0
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
+script = ExtResource("1_orx2w")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_jo7mq")]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_dpgau")
+
+[node name="HitSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_djwvv")
+attenuation_model = 3
+max_db = 6.0
