@@ -7,6 +7,7 @@ var original_position := Vector3.ZERO
 var total_shake_time := 3.0
 var current_strength := 0.3
 var change_timer := 0.0
+@onready var roll_sfx: AudioStreamPlayer3D = $RollSound
 
 func _ready():
 	original_position = position
@@ -17,6 +18,8 @@ func _process(delta):
 		shake_timer = total_shake_time
 		current_strength = 1.0
 		change_timer = 0.0
+		if roll_sfx:
+			roll_sfx.play()
 		emit_signal("shake_started")  # 🔸 tell dice to wake up
 
 	if shake_timer > 0.0:

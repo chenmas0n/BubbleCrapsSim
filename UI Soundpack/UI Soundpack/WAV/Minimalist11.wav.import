@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://gucdkeoaim6h"
+path="res://.godot/imported/Minimalist11.wav-6fe98c23e2b507344a0bd1547a06c435.sample"
+
+[deps]
+
+source_file="res://UI Soundpack/UI Soundpack/WAV/Minimalist11.wav"
+dest_files=["res://.godot/imported/Minimalist11.wav-6fe98c23e2b507344a0bd1547a06c435.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
