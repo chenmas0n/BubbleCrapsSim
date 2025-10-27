@@ -1,9 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://pc1ou5kfongt"]
+[gd_scene load_steps=18 format=3 uid="uid://pc1ou5kfongt"]
 
+[ext_resource type="Script" path="res://game_manager.gd" id="1_brjcx"]
 [ext_resource type="Script" path="res://floor_script.gd" id="1_w0jmk"]
 [ext_resource type="AudioStream" uid="uid://qbkd5mols1os" path="res://UI Soundpack/UI Soundpack/MP3/Retro4.mp3" id="2_6smwf"]
 [ext_resource type="PackedScene" uid="uid://342tiix0dwje" path="res://die_scene.tscn" id="2_el01l"]
 [ext_resource type="Script" path="res://enclosure.gd" id="4_h0lfj"]
+[ext_resource type="Script" path="res://button_script.gd" id="5_p4385"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1srys"]
 sky_top_color = Color(0.181478, 0.460475, 0.729183, 1)
@@ -96,6 +98,7 @@ _data = {
 }
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_brjcx")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0k4t4")
@@ -124,10 +127,8 @@ visible = false
 
 [node name="Die1" parent="." instance=ExtResource("2_el01l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.68361, 0, 0.453914)
-mass = 10.0
 
 [node name="Die2" parent="." instance=ExtResource("2_el01l")]
-mass = 10.0
 
 [node name="Enclosure" type="StaticBody3D" parent="."]
 transform = Transform3D(6.2, 0, 0, 0, 6.2, 0, 0, 0, 6.2, 0, 0, 0)
@@ -155,6 +156,98 @@ shadow_enabled = true
 omni_range = 4.962
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="number_buttons" type="GridContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -268.0
+offset_top = -92.0
+offset_right = 268.0
+grow_horizontal = 2
+grow_vertical = 0
+columns = 10
+
+[node name="2" type="Button" parent="CanvasLayer/number_buttons" groups=["number_buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "2"
+script = ExtResource("5_p4385")
+
+[node name="3" type="Button" parent="CanvasLayer/number_buttons" groups=["number_buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "3"
+script = ExtResource("5_p4385")
+button_value = 3
+
+[node name="4" type="Button" parent="CanvasLayer/number_buttons" groups=["number_buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "4"
+script = ExtResource("5_p4385")
+button_value = 4
+
+[node name="5" type="Button" parent="CanvasLayer/number_buttons" groups=["number_buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "5"
+script = ExtResource("5_p4385")
+button_value = 5
+
+[node name="6" type="Button" parent="CanvasLayer/number_buttons" groups=["number_buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "6"
+script = ExtResource("5_p4385")
+button_value = 6
+
+[node name="8" type="Button" parent="CanvasLayer/number_buttons" groups=["number_buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "8"
+script = ExtResource("5_p4385")
+button_value = 8
+
+[node name="9" type="Button" parent="CanvasLayer/number_buttons" groups=["number_buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "9"
+script = ExtResource("5_p4385")
+button_value = 9
+
+[node name="10" type="Button" parent="CanvasLayer/number_buttons" groups=["number_buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "10"
+script = ExtResource("5_p4385")
+button_value = 10
+
+[node name="11" type="Button" parent="CanvasLayer/number_buttons" groups=["number_buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "11"
+script = ExtResource("5_p4385")
+button_value = 11
+
+[node name="12" type="Button" parent="CanvasLayer/number_buttons" groups=["number_buttons"]]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "12"
+script = ExtResource("5_p4385")
+button_value = 12
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
 libraries = {

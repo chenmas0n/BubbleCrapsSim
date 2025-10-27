@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://da6jlcyuknba5" path="res://Confirm 1.wav" id="3_djwvv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dpgau"]
+size = Vector3(0.98, 0.98, 0.98)
 
 [node name="Die1" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.31639, 0, 0.453914)

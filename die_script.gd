@@ -75,13 +75,8 @@ func _physics_process(delta):
 						for child in parent.get_children():
 							if child.has_method("get_upward_face"):
 								total += child.get_upward_face()
-						if sum_label:
-							sum_label.text = "Sum: " + str(total)
-							sum_label.visible = true
-							# Play animation
-							var anim_player = sum_label.get_parent().get_node_or_null("AnimationPlayer")
-							if anim_player:
-								anim_player.play("ResultAnim")
+						
+						get_node("/root/Main/").set_total(total)
 						print("Dice sum: ", total)
 	else:
 		_still_time = 0.0
