@@ -157,6 +157,13 @@ omni_range = 4.962
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="ClearBetsButton" type="Button" parent="CanvasLayer"]
+offset_left = 853.0
+offset_top = 579.0
+offset_right = 940.0
+offset_bottom = 634.0
+text = "Clear Bets"
+
 [node name="number_buttons" type="GridContainer" parent="CanvasLayer"]
 anchors_preset = 7
 anchor_left = 0.5
