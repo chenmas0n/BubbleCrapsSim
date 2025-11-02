@@ -254,6 +254,17 @@ libraries = {
 "": SubResource("AnimationLibrary_ealxj")
 }
 
+[node name="Points" type="Label" parent="CanvasLayer"]
+offset_left = 15.0
+offset_top = 592.0
+offset_right = 108.0
+offset_bottom = 642.0
+
+[node name="HistoryColumn" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 1111.0
+offset_right = 1151.0
+offset_bottom = 298.0
+
 [node name="SumLabel" type="Label" parent="CanvasLayer"]
 offset_right = 307.0
 offset_bottom = 78.0
@@ -261,3 +272,15 @@ theme_override_font_sizes/font_size = 1
 text = "Sum:0"
 visible_characters = 0
 visible_ratio = 0.0
+
+[node name="PointsFeedback" type="Label" parent="CanvasLayer"]
+offset_left = 47.0
+offset_top = 486.0
+offset_right = 156.0
+offset_bottom = 549.0
+
+[node name="MessageLabel" type="Label" parent="CanvasLayer"]
+offset_left = 235.0
+offset_top = 440.0
+offset_right = 318.0
+offset_bottom = 498.0
