@@ -15,6 +15,13 @@ func _ready():
 	focus_mode = Control.FOCUS_NONE
 
 func _on_pressed():
+	print("=== BUTTON PRESSED ===")
+	print("Button value: ", button_value)
+	print("Disabled property: ", disabled)
+	print("Self disabled: ", self.disabled)
+	if disabled:
+		print("Button is disabled, blocking press")
+		return
 	# Increase wager by increment
 	var game_manager = get_node("/root/Main")
 	if not game_manager:

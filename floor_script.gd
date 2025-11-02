@@ -8,12 +8,19 @@ var total_shake_time := 3.0
 var current_strength := 0.3
 var change_timer := 0.0
 @onready var roll_sfx: AudioStreamPlayer3D = $RollSound
+var is_locked := false
+
 
 func _ready():
 	original_position = position
 	randomize()
+	
+func set_locked(locked: bool) -> void:
+	is_locked = locked
 
 func _process(delta):
+	if is_locked:  # ← If true, entire function returns
+		return
 	if Input.is_action_just_pressed("ui_accept") and shake_timer <= 0.0:
 		shake_timer = total_shake_time
 		current_strength = 1.0
