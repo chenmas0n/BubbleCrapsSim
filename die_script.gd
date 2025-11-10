@@ -1,12 +1,13 @@
 extends RigidBody3D
 
 var _still_time := 0.0
-const V_THRESH := 5	
+const V_THRESH := 5
 const W_THRESH := 7
 const SLEEP_AFTER := 0.3
 var cd := 0.0
 const CD_TIME := 0.03  # short cooldown to prevent rapid repeats
-const MIN_IMPULSE := 15 
+const MIN_IMPULSE := 15
+var ripple_manager: RippleManager = null
 @onready var sfx: AudioStreamPlayer3D = $HitSound
 @onready var sum_label = null
 # Define the normal vectors for each face of the die in local space
@@ -30,6 +31,7 @@ func _ready():
 	var floor = get_parent().get_node_or_null("ShakeFloor") # adjust path as needed
 	if floor:
 		floor.connect("shake_started", Callable(self, "_on_floor_shake_started"))
+	ripple_manager = get_node_or_null("/root/Main/RippleManager")  # Adjust path
 	
 
 
@@ -109,9 +111,13 @@ func _integrate_forces(state):
 	var n = state.get_contact_count()
 	for i in range(n):
 		var imp: Vector3 = state.get_contact_impulse(i)  # impulse vector
-		if imp.length() >= MIN_IMPULSE:                  # check magnitude
+		var imp_magnitude = imp.length()
+		if imp_magnitude >= MIN_IMPULSE:                  # check magnitude
 			sfx.pitch_scale = randf_range(0.96, 1.04)
 			sfx.volume_db = lerp(-10.0, 0.0, clamp(imp.length() / 4.0, 0.0, 1.0))
 			sfx.play()
 			cd = CD_TIME
+			if ripple_manager:
+				var collision_point = state.get_contact_collider_position(i)
+				ripple_manager.add_ripple(collision_point, imp_magnitude,get_instance_id())
 			break

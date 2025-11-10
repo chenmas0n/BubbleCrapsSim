@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://342tiix0dwje"]
 
-[ext_resource type="Script" path="res://die_script.gd" id="1_orx2w"]
+[ext_resource type="Script" uid="uid://bsg87l34jab7s" path="res://die_script.gd" id="1_orx2w"]
 [ext_resource type="PackedScene" uid="uid://b0kxe1grevjpe" path="res://dice.glb" id="2_jo7mq"]
 [ext_resource type="AudioStream" uid="uid://da6jlcyuknba5" path="res://Confirm 1.wav" id="3_djwvv"]
 
@@ -8,7 +8,6 @@
 size = Vector3(0.98, 0.98, 0.98)
 
 [node name="Die1" type="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.31639, 0, 0.453914)
 mass = 10.0
 gravity_scale = 10.0
 continuous_cd = true

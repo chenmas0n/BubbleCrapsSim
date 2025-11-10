@@ -1,11 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://pc1ou5kfongt"]
+[gd_scene load_steps=21 format=4 uid="uid://pc1ou5kfongt"]
 
-[ext_resource type="Script" path="res://game_manager.gd" id="1_brjcx"]
-[ext_resource type="Script" path="res://floor_script.gd" id="1_w0jmk"]
+[ext_resource type="Script" uid="uid://dotud0bdsuno3" path="res://game_manager.gd" id="1_brjcx"]
+[ext_resource type="Script" uid="uid://ncumxlk1yrx3" path="res://floor_script.gd" id="1_w0jmk"]
 [ext_resource type="AudioStream" uid="uid://qbkd5mols1os" path="res://UI Soundpack/UI Soundpack/MP3/Retro4.mp3" id="2_6smwf"]
 [ext_resource type="PackedScene" uid="uid://342tiix0dwje" path="res://die_scene.tscn" id="2_el01l"]
-[ext_resource type="Script" path="res://enclosure.gd" id="4_h0lfj"]
-[ext_resource type="Script" path="res://button_script.gd" id="5_p4385"]
+[ext_resource type="Shader" uid="uid://5wcu2aig5f16" path="res://shaders/floor_ripple.gdshader" id="3_5vw27"]
+[ext_resource type="Script" uid="uid://dda4bbg3qpswr" path="res://enclosure.gd" id="4_h0lfj"]
+[ext_resource type="Script" uid="uid://che70smhavhu1" path="res://scripts/button_script.gd" id="5_p4385"]
+[ext_resource type="Script" uid="uid://caeevpdw7nyvg" path="res://ripple_manager.gd" id="7_272bh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1srys"]
 sky_top_color = Color(0.181478, 0.460475, 0.729183, 1)
@@ -17,14 +19,30 @@ sky_material = SubResource("ProceduralSkyMaterial_1srys")
 
 [sub_resource type="Environment" id="Environment_0k4t4"]
 background_mode = 1
+background_color = Color(0.078431375, 0.13725491, 0.17254902, 1)
 sky = SubResource("Sky_ahrpi")
 tonemap_mode = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e3h4j"]
 size = Vector3(10, 1, 10)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kek77"]
+render_priority = 1
+shader = ExtResource("3_5vw27")
+shader_parameter/ripple_data = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/active_ripple_count = 0
+shader_parameter/pulse_speed = 5.0
+shader_parameter/pulse_max_radius = 4.0
+shader_parameter/pulse_width = 1.2
+shader_parameter/pulse_color = Color(0.2, 0.8, 1, 1)
+shader_parameter/glow_intensity = 3.0
+shader_parameter/floor_alpha = 0.15
+shader_parameter/floor_tint = Color(1, 1, 1, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_aame0"]
 size = Vector3(10, 1, 10)
+subdivide_width = 50
+subdivide_height = 50
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jrpva"]
 albedo_color = Color(0.47451, 1, 1, 0.305882)
@@ -93,8 +111,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ealxj"]
 _data = {
-"RESET": SubResource("Animation_7mayf"),
-"ResultAnim": SubResource("Animation_uy6nl")
+&"RESET": SubResource("Animation_7mayf"),
+&"ResultAnim": SubResource("Animation_uy6nl")
 }
 
 [node name="Main" type="Node3D"]
@@ -104,8 +122,10 @@ script = ExtResource("1_brjcx")
 environment = SubResource("Environment_0k4t4")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.990674, 0.136251, 0, -0.136251, 0.990674, 0.026063, 3.84236, 3.37229)
+transform = Transform3D(0.7071068, 0.56346273, -0.4272116, 0, 0.6041685, 0.79685664, 0.7071068, -0.56346273, 0.4272116, -2.973937, 7.84236, 3.3722897)
+projection = 1
 fov = 115.3
+size = 9.666
 
 [node name="ShakeFloor" type="AnimatableBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -116,6 +136,7 @@ transform = Transform3D(1, 0.000233881, 0.000297644, -0.000233787, 1, -0.0003617
 shape = SubResource("BoxShape3D_e3h4j")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ShakeFloor"]
+material_override = SubResource("ShaderMaterial_kek77")
 mesh = SubResource("BoxMesh_aame0")
 
 [node name="RollSound" type="AudioStreamPlayer3D" parent="ShakeFloor"]
@@ -312,7 +333,7 @@ button_value = 12
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
 libraries = {
-"": SubResource("AnimationLibrary_ealxj")
+&"": SubResource("AnimationLibrary_ealxj")
 }
 
 [node name="Points" type="Label" parent="CanvasLayer"]
@@ -388,3 +409,9 @@ layout_mode = 2
 [node name="CardsContainer" type="HBoxContainer" parent="CanvasLayer/PowerupSelectionPanel/VBoxContainer"]
 layout_mode = 2
 alignment = 1
+
+[node name="RippleManager" type="Node3D" parent="." node_paths=PackedStringArray("floor_mesh") groups=["ripple_manager"]]
+script = ExtResource("7_272bh")
+floor_mesh = NodePath("../ShakeFloor/MeshInstance3D")
+min_impact_velocity = 1.0
+ripple_cooldown = 0.3
